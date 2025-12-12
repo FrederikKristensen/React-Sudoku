@@ -1,33 +1,39 @@
 import React from 'react'
+import '../App.css'
 
-const Grid = () => {
-    // creating the new board
-    const newboard = Array(9).fill(null)
-    // puts in the new board
-    const board = newboard.map(() => Array(9).fill(null));
+const Grid = ( board , puzzle ) => {
 
-    // same as board
-    const newpuzzle = Array(9).fill(null)
-    const puzzle = newpuzzle.map(() => Array(9).fill(null));
 
   return (
     <div className="container">
-        <div className="tabel">
+        <table className="table">
             <tbody>
                 {board.map((row, rowIndex) => {
                     return (
                         <tr key={rowIndex}>
                             {row.map((cell, cellIndex) => {
                                 const isPrefilled = puzzle[rowIndex][cellIndex] !== null;
+                                return (
+                                    <td key={cellIndex} className='cell'>
+                                        <input 
+                                            type="text" 
+                                            maxLength={1}
+                                            value={cell === null ? '' : cell}
+                                            readOnly={isPrefilled}
+                                            onFocus={() => {}}
+                                            onClick={() => {}}
+                                            onChange={() => {}}
+                                        />
+                                    </td>
+                                );
                             })}
                         </tr>
-                    )
+                    );
                 })}
-                
             </tbody>
-        </div>
+        </table>
     </div>
-  )
-}
+  );
+};
 
-export default Grid
+export default Grid;
