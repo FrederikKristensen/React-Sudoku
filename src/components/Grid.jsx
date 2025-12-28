@@ -1,7 +1,7 @@
 import React from 'react'
 import '../App.css'
 
-const Grid = ( board , puzzle ) => {
+const Grid = ( board , puzzle, selected, setSelected ) => {
 
 
   return (
@@ -13,6 +13,13 @@ const Grid = ( board , puzzle ) => {
                         <tr key={rowIndex}>
                             {row.map((cell, cellIndex) => {
                                 const isPrefilled = puzzle[rowIndex][cellIndex] !== null;
+                                let classNames = "cell";
+                                if (selected && rowIndex === selected[0]) {
+                                    classNames += " same-row";
+                                } else if (selected && cellIndex === selected[1]){
+                                    
+                                }
+
                                 return (
                                     <td key={cellIndex} className='cell'>
                                         <input 
@@ -20,8 +27,8 @@ const Grid = ( board , puzzle ) => {
                                             maxLength={1}
                                             value={cell === null ? '' : cell}
                                             readOnly={isPrefilled}
-                                            onFocus={() => {}}
-                                            onClick={() => {}}
+                                            onFocus={() => {setSelected(rowIndex, cellIndex)}}
+                                            onClick={() => {setSelected(rowIndex, cellIndex)}}
                                             onChange={() => {}}
                                         />
                                     </td>
